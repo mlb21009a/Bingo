@@ -31,11 +31,12 @@ struct ContentView: View {
 
                 self.historyView
             }
-            .navigationBarTitle(Text("hoge"))
+            .navigationBarTitle(Text("BINGO"))
         }
     }
 }
 
+// MARK: - パーツ
 private extension ContentView {
 
     var circleText: some View {
@@ -49,6 +50,8 @@ private extension ContentView {
                 self.bingoModel.stop()
             case .stop:
                 self.bingoModel.lottery()
+            case .end:
+                break
             }
         }) {
             Text(self.bingoModel.state.rawValue)

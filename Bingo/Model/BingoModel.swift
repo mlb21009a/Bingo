@@ -15,6 +15,7 @@ class BingoModel: ObservableObject {
     enum State: String {
         case start = "Stop"
         case stop = "Start"
+        case end = "End"
     }
 
     // List表示用のためIdentifiableに準拠する必要あり
@@ -23,7 +24,7 @@ class BingoModel: ObservableObject {
     }
 
     @Published var currentNumber = 0
-    @Published var remnantNumbers = [Int](1...72)
+    @Published var remnantNumbers = [Int](1...75)
     @Published var historyNumbers = [HistoryNumbers]()
     @Published var state = State.stop
 
@@ -46,13 +47,17 @@ class BingoModel: ObservableObject {
         remnantNumbers.remove(value: currentNumber)
         historyNumbers.append(HistoryNumbers(id: currentNumber))
 
+        if remnantNumbers.isEmpty {
+            state = .end
+        }
+
     }
 
 
     /// 最初からにする
     func reset() {
         currentNumber = 0
-        remnantNumbers = [Int](1...72)
+        remnantNumbers = [Int](1...75)
         historyNumbers = [HistoryNumbers]()
         state = State.stop
 
