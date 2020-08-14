@@ -17,8 +17,6 @@ class BingoModel: ObservableObject {
         case stop = "Start"
     }
 
-    var displayLink: CADisplayLink!
-
     // List表示用のためIdentifiableに準拠する必要あり
     struct HistoryNumbers: Identifiable {
         var id: Int
@@ -28,6 +26,8 @@ class BingoModel: ObservableObject {
     @Published var remnantNumbers = [Int](1...72)
     @Published var historyNumbers = [HistoryNumbers]()
     @Published var state = State.stop
+
+    private var displayLink: CADisplayLink!
 
     /// 抽選
     func lottery() {
@@ -42,6 +42,7 @@ class BingoModel: ObservableObject {
     func stop() {
         state = .stop
         displayLink.invalidate()
+        displayLink = nil
         remnantNumbers.remove(value: currentNumber)
         historyNumbers.append(HistoryNumbers(id: currentNumber))
 
