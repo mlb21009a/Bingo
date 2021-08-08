@@ -14,8 +14,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            HStack {
-                VStack {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
                     self.circleText
                         .padding(.top, 100)
                     HStack {
@@ -96,22 +96,19 @@ private extension ContentView {
         var number: Int
 
         var body: some View {
-            Text(String(number))
-                .font(.system(size: size))
-                .fontWeight(.bold)
-                .foregroundColor(Color.red)
-                .background(
-                    GeometryReader { geometry in
-                        Circle()
-                            .foregroundColor(Color.yellow)
-                            .frame(width: geometry.size.width + self.size, height: geometry.size.width + self.size)
-                            .overlay(
-                                GeometryReader { geometry in
-                                    RoundedRectangle(cornerRadius: geometry.size.width/2)
-                                        .stroke(Color.red, lineWidth: 1)
-                                }
-                        )
-                })
+            Circle()
+                .foregroundColor(Color.yellow)
+
+                .overlay(Text(String(number))
+                            .font(.system(size: size))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.red),
+                         alignment: .center
+                )
+
+                .overlay(Circle()
+                            .stroke(Color.red, lineWidth: 1)
+                )
                 .shadow(radius: 10)
         }
     }
