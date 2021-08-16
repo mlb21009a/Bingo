@@ -68,6 +68,7 @@ private extension ContentView {
                 .font(.system(size: 36))
                 .fontWeight(.bold)
         }
+        .disabled(self.bingoModel.isStart)
     }
 
     var historyView: some View {

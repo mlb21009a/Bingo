@@ -18,6 +18,10 @@ class BingoModel: ObservableObject {
         case end = "End"
     }
 
+    var isStart: Bool {
+        return state == .start
+    }
+
     // List表示用のためIdentifiableに準拠する必要あり
     struct HistoryNumbers: Identifiable {
         var id: Int
@@ -52,7 +56,6 @@ class BingoModel: ObservableObject {
         }
 
     }
-
 
     /// 最初からにする
     func reset() {
